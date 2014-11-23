@@ -13,8 +13,13 @@ function Player.new(world)
     log.infof("Creating puck")
     local self = setmetatable({}, Player)
 
+
+    self.img = love.graphics.newImage("assets/images/player.png")
+    w, h = self.img:getDimensions()
+    log.infof("got image %d %d", w, h)
+
     self.b = love.physics.newBody(world, 0, 0, "dynamic")
-    self.s = love.physics.newCircleShape(50)
+    self.s = love.physics.newRectangleShape(self.img:getWidth(), self.img:getHeight())
     self.f = love.physics.newFixture(self.b, self.s)
 
     self.b:setLinearDamping(0.9)
@@ -48,9 +53,7 @@ end
 -- Return the x, y co-ordinates of the player's stick (i.e. where the puck
 -- would be if the player has it)
 function Player:getStickPosition()
-
     return self.b
-
 end
 
 function Player:isStopping(dx, dy)
@@ -62,13 +65,8 @@ function Player:isStopping(dx, dy)
 end
 
 function Player:draw()
-    love.graphics.setColor(60, 60, 60)
-    love.graphics.circle(
-        "fill",
-        self.b:getX(),
-        self.b:getY(),
-        self.s:getRadius(),
-        36)
+    love.graphics.setColor(255, 255, 255)
+    love.graphics.draw(self.img, self.b:getX(), self.b:getY(), self.b:getAngle(),  1, 1, self.img:getWidth()/2, self.img:getHeight()/2)
 end
 
 --

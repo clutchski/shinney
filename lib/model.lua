@@ -1,5 +1,5 @@
 
-local log = require 'log'
+local log = require 'lib.log'
 
 --
 -- Player

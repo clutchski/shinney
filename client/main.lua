@@ -3,8 +3,8 @@
 --
 
 
-local log   = require 'log'
-local model = require 'model'
+local logging   = require 'lib.logging'
+local model = require 'lib.model'
 
 
 function love.load()
@@ -41,11 +41,11 @@ end
 
 -- Update the date of the world.
 function love.update(dt)
-    isDown = love.keyboard.isDown
+    local isDown = love.keyboard.isDown
 
     -- Calculate if we're skating or not.
-    dx = 0
-    dy = 0
+    local dx = 0
+    local dy = 0
 
     if isDown("right") then
         dx = dx + 1
